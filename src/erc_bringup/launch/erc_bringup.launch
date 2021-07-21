@@ -1,0 +1,44 @@
+<launch>
+
+  <node name="image_saver" 
+        pkg="erc_bringup"
+        type="image_saver"/>
+   <!-- gazebo -->
+  <!--<include file="$(find ur_gazebo)/launch/ur3.launch"/>
+
+  <!-- moveit -->
+  <include file="$(find ur3_moveit_config)/launch/ur3_moveit_planning_execution.launch">
+    <arg name="sim" default="true" />
+  </include>
+  <!--
+  <include file = "$(find simulation)/aruco.launch.xml">
+    <arg name="node_name"    value="aruco_single_582"/> 
+    <arg name="markerId"     value="582"/> 
+    <arg name="markerSize"   value="0.45"/>  
+    <arg name="marker_frame" value="aruco_582"/>
+    <arg name="reference_frame"    value="/world"/>  
+  </include>
+-->
+
+
+  <!-- rviz -->
+  <include file="$(find ur3_moveit_config)/launch/moveit_rviz.launch">
+    <arg name="config" default="true" />
+  </include>-->
+  <include file = "$(find aruco_detect)/launch/aruco_detect.launch">
+ <!-- namespace for camera input -->
+  <arg name="camera" default="/camera_image/color"/>
+  <arg name="image" default="image_raw"/>
+  <arg name="transport" default="compressed"/>
+  <arg name="fiducial_len" default="0.05"/>
+  <arg name="dictionary" default="16"/>
+  <arg name="do_pose_estimation" default="true"/>
+  <!-- If vis_msgs set to true, pose estimation will be published with ROS standard vision_msgs -->
+  <arg name="vis_msgs" default="true"/>
+  <arg name="ignore_fiducials" default="" />
+  <arg name="fiducial_len_override" default="" />
+  </include>
+ <!--<node pkg="rviz" type="rviz" name="$(anon rviz)" args="-d $(find fiducial_slam)/fiducials.rviz"/>-->
+
+
+</launch>
